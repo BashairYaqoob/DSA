@@ -1,3 +1,4 @@
+\\if number of cost is cheaper than number of transfer
 #include <iostream>
 using namespace std;
 
