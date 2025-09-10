@@ -1,4 +1,4 @@
-\\if number of cost is cheaper than number of transfer
+\\if number of cost is cheaper than number of transfer: bubble sort
 #include <iostream>
 using namespace std;
 
