@@ -1,4 +1,4 @@
-include <iostream>
+#include <iostream>
 using namespace std;
 
 const int N=5;
@@ -12,7 +12,7 @@ bool solveMaze(int maze[N][N],int solution[N][N] ,int x, int y){
 		solution[x][y]=1;
 		return true;
 	}
-	if(isSafe(maze, x, y)){
+	if(isSafe(maze, x, y) && solution[x][y] == 0){
 		solution[x][y] = 1;
 
         if (solveMaze(maze, solution, x, y + 1)) {
@@ -27,12 +27,13 @@ bool solveMaze(int maze[N][N],int solution[N][N] ,int x, int y){
             return true;
         }
         
-        if (solveMaze(maze, solution, x + 1, y-1)) {
+        if (solveMaze(maze, solution, x , y-1)) {
             return true;
         }
 
         solution[x][y] = 0;
 	}
+	return false;
 }
 
 int main(){
@@ -48,28 +49,28 @@ int main(){
 	int solutionrabbit[N][N]={0};
 	
 	cout<<"Solution for cat: \n";
-	if (solveMaze(maze, solutioncat, 0, 0)) {
+	if (solveMaze(maze, solutioncat, 4, 4)) {
         
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                std::cout << solutioncat[i][j] << " ";
+                cout << solutioncat[i][j] << " ";
             }
-            std::cout << std::endl;
+            cout << std::endl;
         }
     } else {
-        std::cout << "No path to the meat found." << std::endl;
+        cout << "No path to the meat found." << std::endl;
     }
     
     cout<<"\nSolution for Rabbit:\n";
     if (solveMaze(maze, solutionrabbit, 0, 0)) {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                std::cout << solutionrabbit[i][j] << " ";
+                cout << solutionrabbit[i][j] << " ";
             }
-            std::cout << std::endl;
+            cout << std::endl;
         }
     } else {
-        std::cout << "No path to the meat found." << std::endl;
+        cout << "No path to the meat found." << std::endl;
     }
     
 	return 0;
