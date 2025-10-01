@@ -25,3 +25,5 @@ int main(){
 	
 	return 0;
 }
+
+Shell Sort is more efficient for this case because it reduces the number of comparisons and shifts compared to Insertion Sort, especially as the number of elements grows larger.
