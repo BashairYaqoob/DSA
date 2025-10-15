@@ -55,3 +55,43 @@ void combsort(int arr[], int n){
 		
 	}
 }
+______________________________________________________
+void merge(int myarr[], int l, int m, int r){
+			int j=i;
+			int j=m+1;
+			int k=l;
+			int temp[5];
+			while(i<=m && j<=r){
+				if(myarr[i]<myarr[j]){
+					temp[k]=myarr[i];
+					i++;
+					k++;
+				}
+				else{
+					temp[k]=myarr[j];
+					j++;
+					k++;
+				}
+			}
+			while(i<=m){
+				temp[k]=myarr[i];
+				i++;
+				k++;
+			}
+			while(j<=r){
+				temp[k]=myarr[j];
+				j++;
+				k++;
+			}
+			for(int s=l; s<=r; s++){
+				myarr[s]=temp[s];
+			}
+		}
+		void mergesort(int arr[], int l, int r){
+			if(l<r){
+				int mid=l+r/2;
+				mergesort(arr,l,mid);
+				mergesort(arr,mid+1,r);
+				merge(arr,l,mid,r);
+			}
+		}
