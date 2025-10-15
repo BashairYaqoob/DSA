@@ -95,3 +95,29 @@ void merge(int myarr[], int l, int m, int r){
 				merge(arr,l,mid,r);
 			}
 		}
+___________________________________________________
+void quickSort(int arr[], int left, int right) {
+    if (left >= right) return; // base case: 1 or 0 elements
+
+    int pivot = arr[right]; // pick the last element as pivot
+    int i = left;
+
+    for (int j = left; j < right; j++) {
+        if (arr[j] < pivot) {
+            // swap smaller element to the left
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++;
+        }
+    }
+
+    // place pivot in its correct position
+    int temp = arr[i];
+    arr[i] = arr[right];
+    arr[right] = temp;
+
+    // recursively sort left and right parts
+    quickSort(arr, left, i - 1);
+    quickSort(arr, i + 1, right);
+}
