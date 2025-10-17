@@ -146,4 +146,123 @@ int main() {
     return 0;
 }
 
-//
+//------------------------------------
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int comparisons = 0;
+
+void swap(int &a, int &b)
+{
+	int temp = a;
+	a = b;
+	b = temp;
+}
+
+int medianOfThree(int arr[], int low, int high)
+{
+	int mid = (low + high) / 2;
+	int a = arr[low], b = arr[mid], c = arr[high];
+	if ((a > b) != (a > c))
+	{
+		return low;
+	}
+	else if ((b > a) != (b > c))
+	{
+		return mid;
+	}
+	else
+	{
+		return high;
+	}
+}
+
+int partition(int arr[], int low, int high, int pivotIndex)
+{
+	swap(arr[pivotIndex], arr[high]);
+	int pivot = arr[high];
+	int i = low - 1;
+
+	for (int j = low; j < high; j++)
+	{
+		comparisons++;
+		if (arr[j] < pivot)
+		{
+			i++;
+			swap(arr[i], arr[j]);
+		}
+	}
+	swap(arr[i + 1], arr[high]);
+	return i + 1;
+}
+
+void quickSort(int arr[], int low, int high, string method)
+{
+	if (low < high)
+	{
+		int pivotIndex;
+		if (method == "first")
+		{
+			pivotIndex = low;
+		}
+		else if (method == "random")
+		{
+			pivotIndex = low + rand() % (high - low + 1);
+		}
+		else if (method == "middle")
+		{
+			pivotIndex = (low + high) / 2;
+		}
+		else if (method == "median")
+		{
+			pivotIndex = medianOfThree(arr, low, high);
+		}
+		else
+		{
+			pivotIndex = high;
+		}
+
+		int pi = partition(arr, low, high, pivotIndex);
+
+		quickSort(arr, low, pi - 1, method);
+		quickSort(arr, pi + 1, high, method);
+	}
+}
+
+void runQuickSort(string method, int arr[], int n)
+{
+	int temp[20];
+	for (int i = 0; i < n; i++)
+		temp[i] = arr[i];
+	comparisons = 0;
+	quickSort(temp, 0, n - 1, method);
+	cout << method << " pivot || comparisons made: " << comparisons << endl;
+}
+
+int main()
+{
+	srand(time(0));
+
+	int arr1[10] = {12, 7, 45, 23, 89, 3, 67, 5, 34, 20};
+	int arr2[10] = {15, 1, 40, 22, 88, 9, 60, 4, 35, 19};
+	int combined[20];
+	for (int i = 0; i < 10; i++)
+	{
+		combined[i] = arr1[i];
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		combined[10 + i] = arr2[i];
+	}
+
+	int n = 20;
+
+	runQuickSort("first", combined, n);
+	runQuickSort("random", combined, n);
+	runQuickSort("middle", combined, n);
+	runQuickSort("median", combined, n);
+
+	return 0;
+}
