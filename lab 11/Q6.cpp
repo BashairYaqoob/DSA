@@ -3,8 +3,6 @@ using namespace std;
 
 const int SIZE = 15;
 
-
-
 class HashTable
 {
 private:
