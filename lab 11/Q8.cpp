@@ -57,7 +57,6 @@ int rabinKarp(string text, string pattern, int q = 101)
 			}
 		}
 	}
-
 	return -1;
 }
 
