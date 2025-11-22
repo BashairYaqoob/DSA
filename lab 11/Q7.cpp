@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
+
 int bruteForceSearch(string text, string pattern)
 {
     int n = text.length();
